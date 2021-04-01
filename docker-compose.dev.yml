@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  main:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - '8080:8080'
+      - '5005:5005'
+    container_name: 'main'
+    volumes:
+      - '~/.m2/:/root/.m2'
+    environment:
+      - MICRONAUT_ENVIRONMENTS=dev
+      - _JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
