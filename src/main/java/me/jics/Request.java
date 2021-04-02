@@ -6,12 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @Introspected
 public class Request {
-    private String data;
+    @NotNull
+    @NotBlank
     private String info;
+    private String data;
 }
