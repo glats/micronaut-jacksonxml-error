@@ -23,7 +23,7 @@ public class MainController {
     //Don't wanna pass @Header on my method. Looks bad...
     @Post
     @Head
-    public Single<Response> index(@Body @Valid Request request, @Header("Authorization") String authorizationHeader) {
+    public Single<Response> index(@RequestBean @Valid Request request) {
         return Single.just(
                 Response.builder()
                         .message(String.format("%s-%s", request.getData(), request.getInfo()))

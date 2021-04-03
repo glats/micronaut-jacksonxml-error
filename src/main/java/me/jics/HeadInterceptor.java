@@ -20,9 +20,8 @@ public class HeadInterceptor implements MethodInterceptor<Object, Object> {
         Request request = (Request) context.getParameterValueMap().get("request");
         // Where do i get Authorization header?
         // i.e String token = (String) context.getParameterValueMap().get("Authorization");
-        String token = (String) context.getParameterValues()[1];
 
-//        String token = "eyJhdWQiOiJ0ZXN0IiwiaXNzIjoidGVzdCIsInN1YiI6InRlc3QiLCJleHAiOjExMTExMTEsImlhdCI6MTExMTExMTEsImRhdGEiOiJ0ZXN0In0=";
+        String token = request.header;
 
         ObjectMapper mapper = new ObjectMapper();
         Info info = mapper.readValue(new String(Base64.getDecoder().decode(token)), Info.class);
