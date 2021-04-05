@@ -1,6 +1,7 @@
 package me.jics;
 
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.annotation.Header;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +20,10 @@ public class Request {
     @NotNull
     @NotBlank
     private String info;
+
+    @Nullable
     private String data;
 
     @Header("Authorization")
-    String header;
+    private String header;
 }

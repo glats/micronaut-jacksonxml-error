@@ -1,27 +1,26 @@
 package me.jics;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micronaut.aop.InterceptorBean;
 import io.micronaut.aop.MethodInterceptor;
 import io.micronaut.aop.MethodInvocationContext;
+import io.micronaut.core.type.MutableArgumentValue;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Singleton;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Singleton
+@InterceptorBean(Head.class)
 public class HeadInterceptor implements MethodInterceptor<Object, Object> {
     @SneakyThrows
     @Override
     public Object intercept(MethodInvocationContext<Object, Object> context) {
 
         Request request = (Request) context.getParameterValueMap().get("request");
-        // Where do i get Authorization header?
-        // i.e String token = (String) context.getParameterValueMap().get("Authorization");
-
-        String token = request.header;
+        String token = request.getHeader().replace("Bearer ", "");
 
         ObjectMapper mapper = new ObjectMapper();
         Info info = mapper.readValue(new String(Base64.getDecoder().decode(token)), Info.class);

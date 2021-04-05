@@ -35,19 +35,8 @@ public class MainControllerTest {
     }
 
     @Test
-    public void testGeneral() throws Exception {
-        HttpRequest<?> request = HttpRequest.POST("/general", this.getRequest())
-                .header("Authorization", "Bearer eyJhdWQiOiJ0ZXN0IiwiaXNzIjoidGVzdCIsInN1YiI6InRlc3QiLCJleHAiOjExMTExMTEsImlhdCI6MTExMTExMTEsImRhdGEiOiJ0ZXN0In0=");
-        HttpResponse<?> response = client.toBlocking().exchange(request, Argument.of(Response.class));
-        log.info(String.valueOf(response.getBody()));
-        assertEquals(response.code(), HttpStatus.OK.getCode());
-        assertEquals(response.status(), HttpStatus.OK);
-        assertNotNull(response.getBody());
-    }
-
-    @Test
-    public void testPrincipal() throws Exception {
-        HttpRequest<?> request = HttpRequest.POST("/principal", this.getRequest())
+    public void testSimple() throws Exception {
+        HttpRequest<?> request = HttpRequest.POST("/simple", this.getRequest())
                 .header("Authorization", "Bearer eyJhdWQiOiJ0ZXN0IiwiaXNzIjoidGVzdCIsInN1YiI6InRlc3QiLCJleHAiOjExMTExMTEsImlhdCI6MTExMTExMTEsImRhdGEiOiJ0ZXN0In0=");
         HttpResponse<?> response = client.toBlocking().exchange(request, Argument.of(Response.class));
         log.info(String.valueOf(response.getBody()));
